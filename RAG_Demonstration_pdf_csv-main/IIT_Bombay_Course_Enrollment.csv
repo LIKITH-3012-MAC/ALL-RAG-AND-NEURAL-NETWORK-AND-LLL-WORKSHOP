@@ -1,0 +1,11 @@
+Course_Code,Course_Name,Credits,Enrolled_2023,Pass_Rate,Instructor
+CS101,Intro to Programming,4,450,92.5,Dr. Sharma
+CS201,Data Structures,4,380,88.3,Dr. Kumar
+CS301,Machine Learning,3,220,85.2,Dr. Mehta
+EE101,Circuit Theory,4,320,90.1,Dr. Singh
+EE201,Digital Systems,3,250,87.6,Dr. Gupta
+ME101,Engineering Mechanics,4,290,91.2,Dr. Patel
+ME201,Thermodynamics,3,210,89.5,Dr. Reddy
+MA101,Calculus I,4,500,86.8,Dr. Verma
+PH101,Physics I,4,480,88.9,Dr. Joshi
+CH101,Chemistry I,4,470,90.3,Dr. Rao
