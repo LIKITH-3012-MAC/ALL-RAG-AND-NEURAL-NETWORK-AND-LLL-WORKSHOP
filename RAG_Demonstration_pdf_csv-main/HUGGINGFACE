@@ -1,0 +1,2 @@
+#!hf auth login --token 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
+#!huggingface-cli login --token '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'
