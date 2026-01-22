@@ -1,0 +1,77 @@
+Part 1: The Theory (Concepts & Logic)
+(Manam nerchukunna Concepts)
+
+1. The Metric: IoU (Intersection over Union)
+Definition: "The Judge" of object detection.
+Formula:  
+Union Area
+Intersection Area
+​	
+ 
+Logic: Manam geesina box (Predicted) mariyu original box (Ground Truth) entha varaku overlap ayyayi (kalisi unnayi)?
+Score:
+0.5 to 1.0: Good / Excellent.
+< 0.5: Bad detection.
+2. YOLO (You Only Look Once)
+The Concept: The "Speed King". It does not scan pixel-by-pixel. It splits the image into a Grid (S×S) and looks at the whole image at once.
+Best For: Real-time tasks like Tollgates, Traffic, Self-Driving Cars.
+Evolution: YOLOv1 (Fast but confused) → YOLOv8 (Fast & Accurate).
+3. The "Dog vs. Lion" Problem (Occlusion)
+The Question: "What if a Dog and a Lion are in the same grid cell?" (Rendu objects okari venuka okaru unte, YOLO ela gurthistundi?)
+The Solution: Anchor Boxes.
+YOLO doesn't just predict "One Box". It predicts multiple pre-defined shapes (Tall box, Wide box).
+Dog matches the "Tall Box" anchor.
+Lion matches the "Wide/Square Box" anchor.
+Class Probability: Differentiates based on what the object looks like (Fur, Face, etc.).
+4. Transformers (ViT & DETR)
+ViT (Vision Transformer): Treats an image like a sentence. Cuts image into "Patches" (Words) and understands the relationship between them. (Slower, but smarter context).
+DETR Flow: Image → CNN Backbone (Eyes) → Positional Encoding (GPS) → Transformer Encoder/Decoder (Brain) → FFN (Output).
+Part 2: The Tools (Roboflow)
+(Manam vadina Software tools)
+
+1. What is Roboflow?
+Analogy: "The Kitchen for Computer Vision."
+Use:
+Dataset: Storing images (Ingredients).
+Annotate: Drawing boxes around cars/bikes (Cutting vegetables).
+Train: Teaching the model (Cooking).
+Deploy: Using the API (Serving the food).
+2. Roboflow Universe
+Definition: A public library where people share datasets.
+For You: We found the "Indian Vehicle Dataset" here to train your model on Auto Rickshaws and Indian Trucks.
+Part 3: The Practical (Coding & Errors)
+(The Real Engineer Work - Errors manam fix chesinavi)
+
+Step 1: The Setup (Environment)
+The Error: Requires-Python <3.13.
+Issue: Your Mac had Python 3.13 (too new). The library inference-sdk didn't work.
+The Fix:
+We installed Python 3.11 using Homebrew (brew install python@3.11).
+We created a Virtual Environment (my_env) to keep things clean.
+Step 2: The "Bad Image" Bug
+The Error: Malformed base64 input image.
+Issue: The image image.jpg was empty (0 bytes) because the download failed.
+The Fix: We used the curl command to download a proper Bus image from GitHub.
+Step 3: The Script (auto_detect.py)
+This is the code we wrote to test the model.
+Logic:
+Load Image: Opens image.jpg.
+API Call: Sends image + API_KEY to Roboflow servers.
+Receive JSON: Gets a text reply: {"class": "bus", "confidence": 0.90, "x": 100, "y": 200...}.
+Visualize: Uses OpenCV to draw a Green Box on the image.
+Save: Saves the result as result_output.jpg.
+Part 4: The Startup Application (Prometheus)
+(Idi mee Startup ki ela use avtundi?)
+
+You are building an Automated Tollgate. Here is the logic:
+Input: CCTV Camera takes a photo of a vehicle.
+Process: Your Python script runs the YOLO model.
+JSON Logic:
+Python
+if class == "Ambulance":
+    print("Open Gate - FREE")
+elif class == "Car":
+    print("Open Gate - Deduct ₹100")
+elif class == "Truck":
+    print("Open Gate - Deduct ₹200")
+Action: The barrier lifts automatically.
